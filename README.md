@@ -4,4 +4,5 @@ on ifarm:
 ```
 source env.csh
 scons
+./build/simulateIR
 ```
