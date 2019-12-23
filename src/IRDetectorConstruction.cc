@@ -89,31 +89,31 @@ G4VPhysicalVolume* cad_physical = new G4PVPlacement(0, G4ThreeVector(), cad_logi
   G4VPhysicalVolume* vol07_phys = new G4PVPlacement(0, G4ThreeVector(), vol07_logic, "vol07_phys", logicWorld, false, 0);
 
   // d/s ele beam pipe after grey flange, straight end
-  CADMesh * vol08_mesh = new CADMesh("/MAR19_DS_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
+  CADMesh * vol08_mesh = new CADMesh("/DS_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol08_solid = vol08_mesh->TessellatedMesh();
   G4LogicalVolume* vol08_logic = new G4LogicalVolume(vol08_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol08_logic", 0, 0, 0);
   G4VPhysicalVolume* vol08_phys = new G4PVPlacement(0, G4ThreeVector(), vol08_logic, "vol08_phys", logicWorld, false, 0);
 
   // d/s ion beam pipe after grey flange, straight end
-  CADMesh * vol09_mesh = new CADMesh("/MAR19_DS_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
+  CADMesh * vol09_mesh = new CADMesh("/DS_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol09_solid = vol09_mesh->TessellatedMesh();
   G4LogicalVolume* vol09_logic = new G4LogicalVolume(vol09_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol09_logic", 0, 0, 0);
   G4VPhysicalVolume* vol09_phys = new G4PVPlacement(0, G4ThreeVector(), vol09_logic, "vol09_phys", logicWorld, false, 0);
  
   // Flange to NEG chamberr, ele d/s
-  CADMesh * vol10_mesh = new CADMesh("/MAR19_NEG_CHAMBER_E-DS_FLANGE.stl", mm, G4ThreeVector(0, 0, 0), false);
+  CADMesh * vol10_mesh = new CADMesh("/NEG_CHAMBER_E-DS_FLANGE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol10_solid = vol10_mesh->TessellatedMesh();
   G4LogicalVolume* vol10_logic = new G4LogicalVolume(vol10_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol10_logic", 0, 0, 0);
   G4VPhysicalVolume* vol10_phys = new G4PVPlacement(0, G4ThreeVector(), vol10_logic, "vol10_phys", logicWorld, false, 0);
 
   // u/s ele beam pipe, afer grey flange, bell-shaped end
-  CADMesh * vol11_mesh = new CADMesh("/MAR19_US_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
+  CADMesh * vol11_mesh = new CADMesh("/US_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol11_solid = vol11_mesh->TessellatedMesh();
   G4LogicalVolume* vol11_logic = new G4LogicalVolume(vol11_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol11_logic", 0, 0, 0);
   G4VPhysicalVolume* vol11_phys = new G4PVPlacement(0, G4ThreeVector(), vol11_logic, "vol11_phys", logicWorld, false, 0);
 
   // u/s ion beam pipe after grey flange, straight end
-  CADMesh * vol12_mesh = new CADMesh("/MAR19_US_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
+  CADMesh * vol12_mesh = new CADMesh("/US_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol12_solid = vol12_mesh->TessellatedMesh();
   G4LogicalVolume* vol12_logic = new G4LogicalVolume(vol12_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol12_logic", 0, 0, 0);
   G4VPhysicalVolume* vol12_phys = new G4PVPlacement(0, G4ThreeVector(), vol12_logic, "vol12_phys", logicWorld, false, 0);
