@@ -2,29 +2,28 @@
 #define IREventAction_h 1
 
 #include "G4UserEventAction.hh"
-#include "G4ThreeVector.hh"
 #include "globals.hh"
-
-class IRRunAction;
-
-/// Event action class
-///
 
 class IREventAction : public G4UserEventAction
 {
   public:
-    IREventAction(IRRunAction* runAction);
+    IREventAction();
     virtual ~IREventAction();
 
-    virtual void BeginOfEventAction(const G4Event* event);
-    virtual void EndOfEventAction(const G4Event* event);
-
-    void AddStep(G4ThreeVector pos);
-
+    virtual void  BeginOfEventAction(const G4Event* event);
+    virtual void    EndOfEventAction(const G4Event* event);
+    
+    void AddEdep(G4double de);
+    
   private:
-    IRRunAction* fRunAction;
+    G4double  fEnergy;
 };
 
+// inline functions
+
+inline void IREventAction::AddEdep(G4double de) {
+  fEnergy += de; 
+}
 
 #endif
 
