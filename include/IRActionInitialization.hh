@@ -3,17 +3,21 @@
 
 #include "G4VUserActionInitialization.hh"
 
-/// Action initialization class.
+class IRDetectorConstruction;
 
 class IRActionInitialization : public G4VUserActionInitialization
 {
   public:
-    IRActionInitialization();
+    IRActionInitialization(IRDetectorConstruction*);
     virtual ~IRActionInitialization();
 
     virtual void BuildForMaster() const;
     virtual void Build() const;
+
+  private:
+    IRDetectorConstruction* fDetConstruction;
 };
 
-
 #endif
+
+    
