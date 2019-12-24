@@ -1,6 +1,7 @@
 #ifndef IRDetectorConstruction_h
 #define IRDetectorConstruction_h 1
 
+#include<set>
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
@@ -9,6 +10,13 @@ class G4LogicalVolume;
 
 /// Detector construction class to define materials and geometry.
 
+typedef struct { 
+  double Dx; 
+  double Dy; 
+  double Dz; 
+  double Rin; 
+} cb_VTX_ladder_LayParam; 
+        
 class IRDetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
@@ -17,10 +25,11 @@ class IRDetectorConstruction : public G4VUserDetectorConstruction
 
     virtual G4VPhysicalVolume* Construct();
     
-    G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
+    bool IsSensitive(G4VPhysicalVolume* physVol) const { return sensitives.count(physVol)>0; };
 
   protected:
     G4LogicalVolume*  fScoringVolume;
+    std::set<G4VPhysicalVolume*> sensitives;
 };
 
 #endif
