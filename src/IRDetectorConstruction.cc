@@ -58,13 +58,13 @@ G4VPhysicalVolume* cad_physical = new G4PVPlacement(0, G4ThreeVector(), cad_logi
   //Beamline pipe plus flange from central chamber to NEG flange in ele u/s, holds SR mask
   CADMesh * vol01_mesh = new CADMesh("stl/bodycut.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol01_solid = vol01_mesh->TessellatedMesh();
-  G4LogicalVolume* vol01_logic = new G4LogicalVolume(vol01_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol01_logic", 0, 0, 0);
+  G4LogicalVolume* vol01_logic = new G4LogicalVolume(vol01_solid, nist->FindOrBuildMaterial("G4_Al"), "vol01_logic", 0, 0, 0);
   G4VPhysicalVolume* vol01_phys = new G4PVPlacement(0, G4ThreeVector(), vol01_logic, "vol01_phys", logicWorld, false, 0);
 
   //Beamline pipe plus flange from central chamber to NEG flange in ele d/s
   CADMesh * vol02_mesh = new CADMesh("stl/body.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol02_solid = vol02_mesh->TessellatedMesh();
-  G4LogicalVolume* vol02_logic = new G4LogicalVolume(vol02_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol02_logic", 0, 0, 0);
+  G4LogicalVolume* vol02_logic = new G4LogicalVolume(vol02_solid, nist->FindOrBuildMaterial("G4_Al"), "vol02_logic", 0, 0, 0);
   G4VPhysicalVolume* vol02_phys = new G4PVPlacement(0, G4ThreeVector(), vol02_logic, "vol02_phys", logicWorld, false, 0);
 
   //Flange to NEG chamber, ele u/s
@@ -100,16 +100,16 @@ G4VPhysicalVolume* cad_physical = new G4PVPlacement(0, G4ThreeVector(), cad_logi
   // d/s ele beam pipe after grey flange, straight end
   CADMesh * vol08_mesh = new CADMesh("stl/DS_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol08_solid = vol08_mesh->TessellatedMesh();
-  G4LogicalVolume* vol08_logic = new G4LogicalVolume(vol08_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol08_logic", 0, 0, 0);
+  G4LogicalVolume* vol08_logic = new G4LogicalVolume(vol08_solid, nist->FindOrBuildMaterial("G4_Al"), "vol08_logic", 0, 0, 0);
   G4VPhysicalVolume* vol08_phys = new G4PVPlacement(0, G4ThreeVector(), vol08_logic, "vol08_phys", logicWorld, false, 0);
 
   // d/s ion beam pipe after grey flange, straight end
   CADMesh * vol09_mesh = new CADMesh("stl/DS_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol09_solid = vol09_mesh->TessellatedMesh();
-  G4LogicalVolume* vol09_logic = new G4LogicalVolume(vol09_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol09_logic", 0, 0, 0);
+  G4LogicalVolume* vol09_logic = new G4LogicalVolume(vol09_solid, nist->FindOrBuildMaterial("G4_Al"), "vol09_logic", 0, 0, 0);
   G4VPhysicalVolume* vol09_phys = new G4PVPlacement(0, G4ThreeVector(), vol09_logic, "vol09_phys", logicWorld, false, 0);
  
-  // Flange to NEG chamberr, ele d/s
+  // Flange to NEG chamber, ele d/s
   CADMesh * vol10_mesh = new CADMesh("stl/NEG_CHAMBER_E-DS_FLANGE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol10_solid = vol10_mesh->TessellatedMesh();
   G4LogicalVolume* vol10_logic = new G4LogicalVolume(vol10_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol10_logic", 0, 0, 0);
@@ -118,13 +118,13 @@ G4VPhysicalVolume* cad_physical = new G4PVPlacement(0, G4ThreeVector(), cad_logi
   // u/s ele beam pipe, afer grey flange, bell-shaped end
   CADMesh * vol11_mesh = new CADMesh("stl/US_ELECTRON_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol11_solid = vol11_mesh->TessellatedMesh();
-  G4LogicalVolume* vol11_logic = new G4LogicalVolume(vol11_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol11_logic", 0, 0, 0);
+  G4LogicalVolume* vol11_logic = new G4LogicalVolume(vol11_solid, nist->FindOrBuildMaterial("G4_Al"), "vol11_logic", 0, 0, 0);
   G4VPhysicalVolume* vol11_phys = new G4PVPlacement(0, G4ThreeVector(), vol11_logic, "vol11_phys", logicWorld, false, 0);
 
   // u/s ion beam pipe after grey flange, straight end
   CADMesh * vol12_mesh = new CADMesh("stl/US_ION_BASELINE_BEAMLINE.stl", mm, G4ThreeVector(0, 0, 0), false);
   G4VSolid* vol12_solid = vol12_mesh->TessellatedMesh();
-  G4LogicalVolume* vol12_logic = new G4LogicalVolume(vol12_solid, nist->FindOrBuildMaterial("G4_STAINLESS-STEEL"), "vol12_logic", 0, 0, 0);
+  G4LogicalVolume* vol12_logic = new G4LogicalVolume(vol12_solid, nist->FindOrBuildMaterial("G4_Al"), "vol12_logic", 0, 0, 0);
   G4VPhysicalVolume* vol12_phys = new G4PVPlacement(0, G4ThreeVector(), vol12_logic, "vol12_phys", logicWorld, false, 0);
 
   //Outer layer for water chamber 
