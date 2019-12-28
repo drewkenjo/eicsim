@@ -18,10 +18,13 @@
 int main(int argc,char** argv)
 {
   // Detect interactive mode (if no arguments) and define UI session
-  //
+  G4String lundfile("");
   G4UIExecutive* ui = 0;
   if ( argc == 1 ) {
     ui = new G4UIExecutive(argc, argv);
+    lundfile = "SR-PHOTONS-LUND-FMT.OUT";
+  } else {
+    lundfile = argv[1];
   }
 
   // Choose the Random engine
@@ -46,7 +49,7 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(physicsList);
 
   // User action initialization
-  runManager->SetUserInitialization(new IRActionInitialization(detConstruction));
+  runManager->SetUserInitialization(new IRActionInitialization(detConstruction, lundfile));
 
   // Initialize visualization
   //
@@ -62,9 +65,13 @@ int main(int argc,char** argv)
   //
   if ( ! ui ) {
     // batch mode
-    G4String command = "/control/execute ";
-    G4String fileName = argv[1];
-    UImanager->ApplyCommand(command+fileName);
+    runManager->Initialize();
+    std::ifstream ff(lundfile);
+    std::string line;
+    int numlines = 0;
+    while (std::getline(ff, line))
+      numlines++;
+    runManager->BeamOn(numlines);
   }
   else {
     // interactive mode

@@ -51,7 +51,7 @@ void IRRunAction::EndOfRunAction(const G4Run* /*run*/)
 {
   // print histogram statistics
   auto analysisManager = G4AnalysisManager::Instance();
-  if ( analysisManager->GetH1(1) ) {
+  if ( analysisManager->GetH1(0) ) {
     G4cout << G4endl << " ----> print histograms statistic ";
     if(isMaster) {
       G4cout << "for the entire run " << G4endl << G4endl; 

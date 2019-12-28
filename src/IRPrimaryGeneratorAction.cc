@@ -9,9 +9,12 @@
 #include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
+#include "G4AutoLock.hh"
+namespace { G4Mutex myMutex = G4MUTEX_INITIALIZER; }
 
+LundFileReader* IRPrimaryGeneratorAction::lundFile = 0;
 
-IRPrimaryGeneratorAction::IRPrimaryGeneratorAction()
+IRPrimaryGeneratorAction::IRPrimaryGeneratorAction(G4String filename)
 : G4VUserPrimaryGeneratorAction(),
   fParticleGun(0)
 {
@@ -20,27 +23,42 @@ IRPrimaryGeneratorAction::IRPrimaryGeneratorAction()
 
   // default particle kinematic
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4String particleName;
-  G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="gamma");
+  G4ParticleDefinition* particle = particleTable->FindParticle(22);
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleEnergy(6.*MeV);
+
+  G4AutoLock lock(&myMutex);
+  if(!lundFile) lundFile = new LundFileReader(filename);
 }
 
 
 IRPrimaryGeneratorAction::~IRPrimaryGeneratorAction()
 {
+  G4AutoLock lock(&myMutex);
+  if(lundFile) {
+    delete lundFile;
+    lundFile = 0;
+  }
   delete fParticleGun;
 }
 
 
 void IRPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  G4double size = 0.8;
+  if(lundFile)
+  {
+    G4AutoLock lock(&myMutex);
+    std::stringstream ss(lundFile->getline());
+    double tmp;
+    double vx,vy,vz;
+    double px,py,pz,e;
+    ss>>tmp>>tmp>>tmp>>tmp>>tmp>>tmp>>px>>py>>pz>>e>>tmp>>vx>>vy>>vz;
+    G4cout<<px<<" "<<e<<G4endl;
 
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1,0,0.1));
-  fParticleGun->SetParticlePosition(G4ThreeVector(0,0,(rnd.flat()-0.5)*60*cm));
-  fParticleGun->GeneratePrimaryVertex(anEvent);
+    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px*GeV,py*GeV,-pz*GeV).unit());
+    fParticleGun->SetParticleEnergy(e*GeV);
+    fParticleGun->SetParticlePosition(G4ThreeVector(vx*cm,vy*cm,-vz*cm));
+    fParticleGun->GeneratePrimaryVertex(anEvent);
+  }
 }
 
 

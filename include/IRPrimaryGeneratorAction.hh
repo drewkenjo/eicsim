@@ -5,6 +5,7 @@
 #include "G4ParticleGun.hh"
 #include "Randomize.hh"
 #include "globals.hh"
+#include "LundFileReader.hh"
 
 class G4ParticleGun;
 class G4Event;
@@ -18,7 +19,7 @@ class G4Box;
 class IRPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
-    IRPrimaryGeneratorAction();    
+    IRPrimaryGeneratorAction(G4String="");
     virtual ~IRPrimaryGeneratorAction();
 
     // method from the base class
@@ -30,6 +31,7 @@ class IRPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   private:
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
     G4Random rnd;
+    static LundFileReader* lundFile;
 };
 
 

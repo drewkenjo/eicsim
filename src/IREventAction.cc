@@ -5,6 +5,7 @@
 #include "G4RunManager.hh"
 #include "G4Event.hh"
 #include "G4UnitsTable.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "Randomize.hh"
 #include <iomanip>
@@ -33,10 +34,10 @@ void IREventAction::EndOfEventAction(const G4Event* event)
   auto analysisManager = G4AnalysisManager::Instance();
 
   // fill histograms
-  analysisManager->FillH1(0, fEnergy);
+  analysisManager->FillH1(0, fEnergy/GeV);
   
   // fill ntuple
-  analysisManager->FillNtupleDColumn(0, fEnergy);
+  analysisManager->FillNtupleDColumn(0, fEnergy/GeV);
   analysisManager->AddNtupleRow();  
   
   // Print per event (modulo n)
@@ -47,7 +48,7 @@ void IREventAction::EndOfEventAction(const G4Event* event)
 
     G4cout
        << "   Absorber: total energy: " << std::setw(7)
-                                        << G4BestUnit(fEnergy,"Energy")
+                                        << G4BestUnit(fEnergy/GeV,"Energy")
        << G4endl;
   }
 }  

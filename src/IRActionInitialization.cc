@@ -6,10 +6,10 @@
 #include "IRDetectorConstruction.hh"
 
 
-IRActionInitialization::IRActionInitialization
-                            (IRDetectorConstruction* detConstruction)
+IRActionInitialization::IRActionInitialization(IRDetectorConstruction* detConstruction, G4String filename)
  : G4VUserActionInitialization(),
-   fDetConstruction(detConstruction)
+   fDetConstruction(detConstruction),
+   lundFilename(filename)
 {}
 
 
@@ -25,7 +25,7 @@ void IRActionInitialization::BuildForMaster() const
 
 void IRActionInitialization::Build() const
 {
-  SetUserAction(new IRPrimaryGeneratorAction);
+  SetUserAction(new IRPrimaryGeneratorAction(lundFilename));
   SetUserAction(new IRRunAction);
   auto eventAction = new IREventAction;
   SetUserAction(eventAction);

@@ -2,13 +2,14 @@
 #define IRActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
+#include "G4String.hh"
 
 class IRDetectorConstruction;
 
 class IRActionInitialization : public G4VUserActionInitialization
 {
   public:
-    IRActionInitialization(IRDetectorConstruction*);
+    IRActionInitialization(IRDetectorConstruction*, G4String);
     virtual ~IRActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -16,6 +17,7 @@ class IRActionInitialization : public G4VUserActionInitialization
 
   private:
     IRDetectorConstruction* fDetConstruction;
+    G4String lundFilename;
 };
 
 #endif
