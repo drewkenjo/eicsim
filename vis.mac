@@ -66,9 +66,10 @@
 /vis/viewer/set/viewpointVector 0 -1 0.1
 
 
-/vis/geometry/set/colour vol01_logic 0 0.901961 0.098039 0.294118 1
+/vis/geometry/set/colour vol01_logic 0 0.901961 0.098039 0.294118 0.3
 /vis/geometry/set/colour vol02_logic 0 0.235294 0.705882 0.294118 1
-/vis/geometry/set/colour vol03_logic 0 1.000000 0.882353 0.098039 1
+/vis/geometry/set/colour vol02_logic 0 1.000000 0.882353 0.098039 0.3
+/vis/geometry/set/colour vol03_logic 0 1.000000 0.882353 0.098039 0.3
 /vis/geometry/set/colour vol04_logic 0 0.000000 0.509804 0.784314 1
 /vis/geometry/set/colour vol05_logic 0 0.960784 0.509804 0.188235 1
 /vis/geometry/set/colour vol06_logic 0 0.568627 0.117647 0.705882 1
@@ -77,11 +78,11 @@
 /vis/geometry/set/colour vol09_logic 0 0.823529 0.960784 0.235294 1
 /vis/geometry/set/colour vol10_logic 0 0.980392 0.745098 0.745098 1
 /vis/geometry/set/colour vol11_logic 0 0.000000 0.501961 0.501961 1
-/vis/geometry/set/colour vol12_logic 0 0.901961 0.745098 1.000000 1
+#/vis/geometry/set/colour vol12_logic 0 0.901961 0.745098 1.000000 1
 #/vis/geometry/set/colour vol13_logic 0 0.666667 0.431373 0.156863 1
 #/vis/geometry/set/colour vol14_logic 0 1.000000 0.980392 0.784314 1
 #/vis/geometry/set/colour vol15_logic 0 0.501961 0.000000 0.000000 1
-#/vis/geometry/set/colour vol16_logic 0 0.666667 1.000000 0.764706 1
+/vis/geometry/set/colour vol16_logic 0 0.666667 1.000000 0.764706 0
 #/vis/geometry/set/colour vol17_logic 0 0.501961 0.501961 0.000000 1
 #/vis/geometry/set/colour vol18_logic 0 1.000000 0.843137 0.705882 1
 #/vis/geometry/set/colour vol19_logic 0 0.000000 0.000000 0.501961 1
