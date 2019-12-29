@@ -34,16 +34,15 @@ void IREventAction::EndOfEventAction(const G4Event* event)
   auto analysisManager = G4AnalysisManager::Instance();
 
   // fill histograms
-  analysisManager->FillH1(0, fEnergy/GeV);
+  //analysisManager->FillH1(0, fEnergy/GeV);
   
   // fill ntuple
-  analysisManager->FillNtupleDColumn(0, fEnergy/GeV);
-  analysisManager->AddNtupleRow();  
+  //analysisManager->FillNtupleDColumn(0, fEnergy/GeV);
+  //analysisManager->AddNtupleRow(0);
   
   // Print per event (modulo n)
   auto eventID = event->GetEventID();
-  auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
-  if ( ( printModulo > 0 ) && ( eventID % printModulo == 0 ) ) {
+  if ( eventID % 1000 == 0 ) {
     G4cout << "---> End of event: " << eventID << G4endl;     
 
     G4cout

@@ -52,7 +52,6 @@ void IRPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     double vx,vy,vz;
     double px,py,pz,e;
     ss>>tmp>>tmp>>tmp>>tmp>>tmp>>tmp>>px>>py>>pz>>e>>tmp>>vx>>vy>>vz;
-    G4cout<<px<<" "<<e<<G4endl;
 
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px*GeV,py*GeV,-pz*GeV).unit());
     fParticleGun->SetParticleEnergy(e*GeV);

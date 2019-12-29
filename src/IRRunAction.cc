@@ -11,8 +11,6 @@ IRRunAction::IRRunAction()
  : G4UserRunAction()
 { 
   // set printing event number per each event
-  G4RunManager::GetRunManager()->SetPrintProgress(1);     
-
   auto analysisManager = G4AnalysisManager::Instance();
   G4cout << "Using " << analysisManager->GetType() << G4endl;
 
@@ -21,11 +19,17 @@ IRRunAction::IRRunAction()
     // Note: merging ntuples is available only with Root output
 
   // Creating histograms
-  analysisManager->CreateH1("Edep","Edep in SVT", 100, 0., 800*MeV);
+  //analysisManager->CreateH1("Edep","Edep in SVT", 100, 0., 800*MeV);
+  analysisManager->CreateH2("xy0","X:Y at z=0", 100, -2,2, 100,-2,2);
+  analysisManager->CreateH2("xy1","X:Y at z=-1m", 100, -2,2, 100,-2,2);
+  analysisManager->CreateH2("xys","X:Y SVT", 100, -20,20, 100,-20,20);
 
   // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
-  analysisManager->CreateNtupleDColumn("Edep");
+  analysisManager->CreateNtupleDColumn("edep");
+  analysisManager->CreateNtupleDColumn("z");
+  analysisManager->CreateNtupleDColumn("x");
+  analysisManager->CreateNtupleDColumn("y");
   analysisManager->FinishNtuple();
 }
 
@@ -51,20 +55,6 @@ void IRRunAction::EndOfRunAction(const G4Run* /*run*/)
 {
   // print histogram statistics
   auto analysisManager = G4AnalysisManager::Instance();
-  if ( analysisManager->GetH1(0) ) {
-    G4cout << G4endl << " ----> print histograms statistic ";
-    if(isMaster) {
-      G4cout << "for the entire run " << G4endl << G4endl; 
-    }
-    else {
-      G4cout << "for the local thread " << G4endl << G4endl; 
-    }
-    
-    G4cout << " EAbs : mean = " 
-       << G4BestUnit(analysisManager->GetH1(0)->mean(), "Energy") 
-       << " rms = " 
-       << G4BestUnit(analysisManager->GetH1(0)->rms(),  "Energy") << G4endl;
-  }
 
   // save histograms & ntuple
   analysisManager->Write();
