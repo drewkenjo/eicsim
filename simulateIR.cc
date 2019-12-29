@@ -20,11 +20,14 @@ int main(int argc,char** argv)
   // Detect interactive mode (if no arguments) and define UI session
   G4String lundfile("");
   G4UIExecutive* ui = 0;
-  if ( argc == 1 ) {
-    ui = new G4UIExecutive(argc, argv);
-    lundfile = "SR-PHOTONS-LUND-FMT.OUT";
-  } else {
+  if ( argc == 2 ) {
     lundfile = argv[1];
+  }
+  else if (argc==3) {
+    ui = new G4UIExecutive(argc, argv);
+    lundfile = argv[1];
+  } else {
+    return 0;
   }
 
   // Choose the Random engine
@@ -37,6 +40,9 @@ int main(int argc,char** argv)
 #else
   G4RunManager* runManager = new G4RunManager;
 #endif
+
+  runManager->SetEventModulo(1000);
+  runManager->SetPrintProgress(0);
 
   // Set mandatory initialization classes
   // Detector construction
@@ -75,7 +81,8 @@ int main(int argc,char** argv)
   }
   else {
     // interactive mode
-    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    G4String macname(argv[2]);
+    UImanager->ApplyCommand("/control/execute "+macname);
     ui->SessionStart();
     delete ui;
   }
