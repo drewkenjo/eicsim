@@ -300,7 +300,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
       sprintf(abname, "cb_VTX_ladder_Phys_%d_%d", lay, ia);
       G4VPhysicalVolume* cb_VTX_ladder_Phys = new G4PVPlacement(G4Transform3D(rm[lay][ia], G4ThreeVector(x, y, z)),
           abname, cb_VTX_ladder_Logic[lay], physWorld, false, 0., checkOverlaps);
-      sensitives[cb_VTX_ladder_Phys] = lay+1;
+      sensitives[cb_VTX_ladder_Phys] = (lay+1)*100 + ia;
     }
     //-------------------------------------------------------------------------
     //                          VTX  slices and pixels

@@ -27,6 +27,7 @@ class IRDetectorConstruction : public G4VUserDetectorConstruction
     virtual G4VPhysicalVolume* Construct();
 
     bool IsSensitive(G4VPhysicalVolume* physVol) const { return sensitives.count(physVol)>0; };
+    int GetDetID(G4VPhysicalVolume* physVol) const { return sensitives.at(physVol); };
 
   protected:
     G4LogicalVolume*  fScoringVolume;
