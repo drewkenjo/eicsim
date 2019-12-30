@@ -1,7 +1,7 @@
 #ifndef IRDetectorConstruction_h
 #define IRDetectorConstruction_h 1
 
-#include<set>
+#include "map"
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 
