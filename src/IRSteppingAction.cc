@@ -75,5 +75,9 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
 
     analysisManager->FillH1(0, 1, step->GetPreStepPoint()->GetTotalEnergy()/GeV);
   }
+  if(step->GetTrack()->GetCurrentStepNumber()==1) {
+    auto analysisManager = G4AnalysisManager::Instance();
+    analysisManager->FillH1(0, 0, step->GetPreStepPoint()->GetTotalEnergy()/GeV);
+  }
 }
 

@@ -24,7 +24,7 @@ IRRunAction::IRRunAction()
   analysisManager->CreateH2("xy1","X:Y at z=-1m", 100, -2,2, 100,-2,2);
   analysisManager->CreateH2("xys","X:Y SVT, hits", 100, -20,20, 100,-20,20);
   analysisManager->CreateH2("xye","X:Y SVT, edep [GeV] weighted", 100, -20,20, 100,-20,20);
-  analysisManager->CreateH1("flux","flux total energy", 1, 0,2);
+  analysisManager->CreateH1("flux","flux total energy", 2, 0,2);
 
   // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
