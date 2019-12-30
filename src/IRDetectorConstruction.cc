@@ -152,8 +152,9 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4LogicalVolume* vol16_logic = new G4LogicalVolume(vol16_solid, nist->FindOrBuildMaterial("G4_Galactic"), "vol16_logic", 0, 0, 0);
   G4VPhysicalVolume* vol16_phys = new G4PVPlacement(0, G4ThreeVector(), vol16_logic, "vol16_phys", logicWorld, false, 0, checkOverlaps);
 
-  sensitives.insert(vol01_phys);
-  sensitives.insert(vol02_phys);
+
+  sensitives[vol01_phys] = 0;
+  sensitives[vol02_phys] = 0;
 
 
 
@@ -286,7 +287,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
     for (int ia = 0; ia < NUM; ia++) {
       //for (int ia=0;ia<1;ia++) {
-      printf("cb_VTX_ladder:: lay=%d  NUM=%d, dR=%f cb_VTX_ladder_deltaphi=%f %f \n",lay, NUM,  dR, cb_VTX_ladder_deltaphi,ladder_deltashi);
+      printf("cb_VTX_ladder:: lay=%d  NUM=%d, dR=%f cb_VTX_ladder_deltaphi=%f %f \n",lay, ia,  dR, cb_VTX_ladder_deltaphi,ladder_deltashi);
       printf("cb_VTX_ladder:: Module  loop:: %d\n", ia);
 
       phi = (ia * (cb_VTX_ladder_deltaphi));
@@ -299,7 +300,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
       sprintf(abname, "cb_VTX_ladder_Phys_%d_%d", lay, ia);
       G4VPhysicalVolume* cb_VTX_ladder_Phys = new G4PVPlacement(G4Transform3D(rm[lay][ia], G4ThreeVector(x, y, z)),
           abname, cb_VTX_ladder_Logic[lay], physWorld, false, 0., checkOverlaps);
-      //sensitives.insert(cb_VTX_ladder_Phys);
+      sensitives[cb_VTX_ladder_Phys] = lay+1;
     }
     //-------------------------------------------------------------------------
     //                          VTX  slices and pixels
