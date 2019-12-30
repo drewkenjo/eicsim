@@ -42,6 +42,8 @@ void IREventAction::EndOfEventAction(const G4Event* event)
   
   // Print per event (modulo n)
   auto eventID = event->GetEventID();
+
+/*
   if ( eventID % 1000 == 0 ) {
     G4cout << "---> End of event: " << eventID << G4endl;     
 
@@ -50,5 +52,6 @@ void IREventAction::EndOfEventAction(const G4Event* event)
                                         << G4BestUnit(fEnergy/GeV,"Energy")
        << G4endl;
   }
+*/
 }  
 
