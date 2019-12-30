@@ -42,8 +42,6 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     fEventAction->AddEdep(edep);
   }
 
-  if(step->GetTrack()->GetTrackID()!=1) return;
-
   G4ThreeVector pos0 = step->GetPreStepPoint()->GetPosition();
   G4ThreeVector pos1 = step->GetPostStepPoint()->GetPosition();
 
@@ -56,8 +54,11 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     analysisManager->FillNtupleDColumn(1, pos0.z()/cm);
     analysisManager->FillNtupleDColumn(2, pos0.x()/cm);
     analysisManager->FillNtupleDColumn(3, pos0.y()/cm);
+    analysisManager->FillNtupleIColumn(4, fDetConstruction->GetDetID(volume));
     analysisManager->AddNtupleRow();
   }
+
+  if(step->GetTrack()->GetTrackID()!=1) return;
 
   if(pos0.z()>0 && pos1.z()<0) {
     G4double x0 = pos0.x() + (pos1.x()-pos0.x())*(0-pos0.z())/(pos1.z()-pos0.z());
@@ -68,8 +69,11 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
   if(pos0.z()>-1*m && pos1.z()<-1*m) {
     G4double x1 = pos0.x() + (pos1.x()-pos0.x())*(-1*m-pos0.z())/(pos1.z()-pos0.z());
     G4double y1 = pos0.y() + (pos1.y()-pos0.y())*(-1*m-pos0.z())/(pos1.z()-pos0.z());
+
     auto analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillH2(1, x1/cm, y1/cm);
+
+    analysisManager->FillH1(0, 1, step->GetPreStepPoint()->GetTotalEnergy()/GeV);
   }
 }
 
