@@ -22,7 +22,8 @@ IRRunAction::IRRunAction()
   //analysisManager->CreateH1("Edep","Edep in SVT", 100, 0., 800*MeV);
   analysisManager->CreateH2("xy0","X:Y at z=0", 100, -2,2, 100,-2,2);
   analysisManager->CreateH2("xy1","X:Y at z=-1m", 100, -2,2, 100,-2,2);
-  analysisManager->CreateH2("xys","X:Y SVT", 100, -20,20, 100,-20,20);
+  analysisManager->CreateH2("xys","X:Y SVT, hits", 100, -20,20, 100,-20,20);
+  analysisManager->CreateH2("xye","X:Y SVT, edep [GeV] weighted", 100, -20,20, 100,-20,20);
 
   // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
