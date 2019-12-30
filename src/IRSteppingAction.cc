@@ -77,7 +77,7 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
   }
   if(step->GetTrack()->GetCurrentStepNumber()==1) {
     auto analysisManager = G4AnalysisManager::Instance();
-    analysisManager->FillH1(0, 0)
+    analysisManager->FillH1(0, 0);
   }
 }
 
