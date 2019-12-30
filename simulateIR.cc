@@ -9,6 +9,7 @@
 
 #include "G4UImanager.hh"
 #include "FTFP_BERT.hh"
+#include "G4PhysListFactory.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
@@ -37,6 +38,7 @@ int main(int argc,char** argv)
   //
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
+  runManager->SetNumberOfThreads(6);
 #else
   G4RunManager* runManager = new G4RunManager;
 #endif
@@ -50,7 +52,9 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(detConstruction);
 
   // Physics list
-  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  G4PhysListFactory physFactory;
+  //G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  G4VModularPhysicsList* physicsList = physFactory.GetReferencePhysList("QGSP_BERT_HP_EMZ");
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
 
