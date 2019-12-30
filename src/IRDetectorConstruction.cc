@@ -237,7 +237,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4LogicalVolume *pxdPixel_log[10]; //pointer to the logical pixel
 
 
-  for (uint lay = 0; lay < Lays.size(); lay++) {
+  for (uint lay = 1; lay < Lays.size(); lay++) {
 
     printf("cb_VTX_ladder:: Layer loop:: %d\n", lay);
     double cb_VTX_ladder_DZ = Lays[lay].Dz;
