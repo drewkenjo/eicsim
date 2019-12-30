@@ -35,11 +35,10 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     prename = step->GetPreStepPoint()->GetPhysicalVolume()->GetName();
   if(step->GetPostStepPoint()->GetPhysicalVolume())
     postname = step->GetPostStepPoint()->GetPhysicalVolume()->GetName();
-  G4cout<<"kim: "<<prename<<" "<<postname<<G4endl;
 */
 
   if ( fDetConstruction->IsSensitive(volume) ) {
-    G4cout<<step->GetTrack()->GetTrackID()<<" track id, kim, edep="<<edep<<" "<<volume->GetName()<<G4endl;
+//    G4cout<<step->GetTrack()->GetTrackID()<<" track id, kim, edep="<<edep<<" "<<volume->GetName()<<G4endl;
     fEventAction->AddEdep(edep);
   }
 
@@ -51,6 +50,7 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
   if ( fDetConstruction->IsSensitive(volume) ) {
     auto analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillH2(2, pos0.x()/cm, pos0.y()/cm);
+    analysisManager->FillH2(3, pos0.x()/cm, pos0.y()/cm, edep/GeV);
 
     analysisManager->FillNtupleDColumn(0, edep/GeV);
     analysisManager->FillNtupleDColumn(1, pos0.z()/cm);
