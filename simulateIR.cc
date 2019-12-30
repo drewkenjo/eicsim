@@ -43,7 +43,6 @@ int main(int argc,char** argv)
   G4RunManager* runManager = new G4RunManager;
 #endif
 
-  runManager->SetEventModulo(1000);
   runManager->SetPrintProgress(0);
 
   // Set mandatory initialization classes
