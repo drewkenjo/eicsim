@@ -153,8 +153,11 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4VPhysicalVolume* vol16_phys = new G4PVPlacement(0, G4ThreeVector(), vol16_logic, "vol16_phys", logicWorld, false, 0, checkOverlaps);
 
 
-  sensitives[vol01_phys] = 0;
-  sensitives[vol02_phys] = 0;
+  sensitives[vol04_phys] = 0;
+  sensitives[vol07_phys] = 0;
+  sensitives[vol13_phys] = 0;
+  sensitives[vol14_phys] = 0;
+  sensitives[vol15_phys] = 0;
 
 
 
