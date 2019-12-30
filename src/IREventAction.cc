@@ -12,8 +12,7 @@
 
 
 IREventAction::IREventAction()
- : G4UserEventAction(),
-   fEnergy(0.)
+ : G4UserEventAction()
 {}
 
 
@@ -23,15 +22,13 @@ IREventAction::~IREventAction()
 
 void IREventAction::BeginOfEventAction(const G4Event* /*event*/)
 {  
-  // initialisation per event
-  fEnergy = 0.;
 }
 
 
 void IREventAction::EndOfEventAction(const G4Event* event)
 {
   // get analysis manager
-  auto analysisManager = G4AnalysisManager::Instance();
+  // auto analysisManager = G4AnalysisManager::Instance();
 
   // fill histograms
   //analysisManager->FillH1(0, fEnergy/GeV);
@@ -41,7 +38,7 @@ void IREventAction::EndOfEventAction(const G4Event* event)
   //analysisManager->AddNtupleRow(0);
   
   // Print per event (modulo n)
-  auto eventID = event->GetEventID();
+  // auto eventID = event->GetEventID();
 
 /*
   if ( eventID % 1000 == 0 ) {

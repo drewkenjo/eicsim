@@ -37,10 +37,10 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     postname = step->GetPostStepPoint()->GetPhysicalVolume()->GetName();
 */
 
-  if ( fDetConstruction->IsSensitive(volume) ) {
+//  if ( fDetConstruction->IsSensitive(volume) ) {
 //    G4cout<<step->GetTrack()->GetTrackID()<<" track id, kim, edep="<<edep<<" "<<volume->GetName()<<G4endl;
-    fEventAction->AddEdep(edep);
-  }
+//    fEventAction->AddEdep(edep);
+//  }
 
   G4ThreeVector pos0 = step->GetPreStepPoint()->GetPosition();
   G4ThreeVector pos1 = step->GetPostStepPoint()->GetPosition();

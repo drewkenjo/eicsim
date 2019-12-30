@@ -14,16 +14,7 @@ class IREventAction : public G4UserEventAction
     virtual void    EndOfEventAction(const G4Event* event);
     
     void AddEdep(G4double de);
-    
-  private:
-    G4double  fEnergy;
 };
-
-// inline functions
-
-inline void IREventAction::AddEdep(G4double de) {
-  fEnergy += de; 
-}
 
 #endif
 
