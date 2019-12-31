@@ -154,6 +154,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
 
   sensitives[vol04_phys] = 0;
+  sensitives[vol06_phys] = 0;
   sensitives[vol07_phys] = 0;
   sensitives[vol13_phys] = 0;
   sensitives[vol14_phys] = 0;
