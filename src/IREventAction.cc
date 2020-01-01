@@ -21,7 +21,8 @@ IREventAction::~IREventAction()
 
 
 void IREventAction::BeginOfEventAction(const G4Event* /*event*/)
-{  
+{
+  origins.clear();
 }
 
 
