@@ -33,6 +33,10 @@ IRRunAction::IRRunAction()
   analysisManager->CreateNtupleDColumn("x");
   analysisManager->CreateNtupleDColumn("y");
   analysisManager->CreateNtupleIColumn("detId");
+  analysisManager->CreateNtupleDColumn("x0");
+  analysisManager->CreateNtupleDColumn("y0");
+  analysisManager->CreateNtupleDColumn("z0");
+  analysisManager->CreateNtupleIColumn("pid");
   analysisManager->FinishNtuple();
 }
 

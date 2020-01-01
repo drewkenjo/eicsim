@@ -31,6 +31,20 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
 
 /*
   G4String prename = "--", postname = "==";
+  if(step->GetPreStepPoint()->GetProcessDefinedStep())
+    prename = step->GetPreStepPoint()->GetProcessDefinedStep()->GetProcessName();
+  if(step->GetPostStepPoint()->GetProcessDefinedStep())
+    postname = step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName();
+
+  G4cout<<"kim: "<<step->GetTrack()->GetTrackID()<<" "
+        <<step->GetTrack()->GetCurrentStepNumber()<<" "
+        <<prename<<" "<<postname
+        <<G4endl;
+*/
+
+
+/*
+  G4String prename = "--", postname = "==";
   if(step->GetPreStepPoint()->GetPhysicalVolume())
     prename = step->GetPreStepPoint()->GetPhysicalVolume()->GetName();
   if(step->GetPostStepPoint()->GetPhysicalVolume())
@@ -50,11 +64,22 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     analysisManager->FillH2(2, pos0.x()/cm, pos0.y()/cm);
     analysisManager->FillH2(3, pos0.x()/cm, pos0.y()/cm, edep/GeV);
 
+//    if(edep>0 && step->GetPreStepPoint()->GetProcessDefinedStep() && step->GetPostStepPoint()->GetProcessDefinedStep()) G4cout<<"kim: process ="
+//      <<step->GetPreStepPoint()->GetProcessDefinedStep()->GetProcessName()<<" "
+//      <<step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()<<G4endl;
+
+
+    G4ThreeVector origin = step->GetTrack()->GetPosition();
+
     analysisManager->FillNtupleDColumn(0, edep/GeV);
     analysisManager->FillNtupleDColumn(1, pos0.z()/cm);
     analysisManager->FillNtupleDColumn(2, pos0.x()/cm);
     analysisManager->FillNtupleDColumn(3, pos0.y()/cm);
     analysisManager->FillNtupleIColumn(4, fDetConstruction->GetDetID(volume));
+    analysisManager->FillNtupleDColumn(5, origin.z()/cm);
+    analysisManager->FillNtupleDColumn(6, origin.x()/cm);
+    analysisManager->FillNtupleDColumn(7, origin.y()/cm);
+    analysisManager->FillNtupleIColumn(8, step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());
     analysisManager->AddNtupleRow();
   }
 
