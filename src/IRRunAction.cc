@@ -29,9 +29,9 @@ IRRunAction::IRRunAction()
   // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
   analysisManager->CreateNtupleDColumn("edep");
-  analysisManager->CreateNtupleDColumn("z");
   analysisManager->CreateNtupleDColumn("x");
   analysisManager->CreateNtupleDColumn("y");
+  analysisManager->CreateNtupleDColumn("z");
   analysisManager->CreateNtupleIColumn("detId");
   analysisManager->CreateNtupleDColumn("x0");
   analysisManager->CreateNtupleDColumn("y0");

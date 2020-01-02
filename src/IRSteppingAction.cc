@@ -75,13 +75,13 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
 
 
     analysisManager->FillNtupleDColumn(0, edep/GeV);
-    analysisManager->FillNtupleDColumn(1, pos0.z()/cm);
-    analysisManager->FillNtupleDColumn(2, pos0.x()/cm);
-    analysisManager->FillNtupleDColumn(3, pos0.y()/cm);
+    analysisManager->FillNtupleDColumn(1, pos0.x()/cm);
+    analysisManager->FillNtupleDColumn(2, pos0.y()/cm);
+    analysisManager->FillNtupleDColumn(3, pos0.z()/cm);
     analysisManager->FillNtupleIColumn(4, fDetConstruction->GetDetID(volume));
-    analysisManager->FillNtupleDColumn(5, fEventAction->origins[tid].z()/cm);
-    analysisManager->FillNtupleDColumn(6, fEventAction->origins[tid].x()/cm);
-    analysisManager->FillNtupleDColumn(7, fEventAction->origins[tid].y()/cm);
+    analysisManager->FillNtupleDColumn(5, fEventAction->origins[tid].x()/cm);
+    analysisManager->FillNtupleDColumn(6, fEventAction->origins[tid].y()/cm);
+    analysisManager->FillNtupleDColumn(7, fEventAction->origins[tid].z()/cm);
     analysisManager->FillNtupleIColumn(8, step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());
     analysisManager->AddNtupleRow();
   }
