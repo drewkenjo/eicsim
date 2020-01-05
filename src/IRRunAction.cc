@@ -27,17 +27,26 @@ IRRunAction::IRRunAction()
   analysisManager->CreateH1("flux","flux total energy", 2, 0,2);
 
   // Creating ntuple
+  analysisManager->CreateNtuple("tracks", "potential tracks");
+  analysisManager->CreateNtupleDColumn(0,"x");
+  analysisManager->CreateNtupleDColumn(0,"y");
+  analysisManager->CreateNtupleDColumn(0,"z");
+  analysisManager->CreateNtupleIColumn(0,"detId");
+  analysisManager->CreateNtupleDColumn(0,"x0");
+  analysisManager->CreateNtupleDColumn(0,"y0");
+  analysisManager->CreateNtupleDColumn(0,"z0");
+  analysisManager->CreateNtupleIColumn(0,"pdg");
+  analysisManager->CreateNtupleIColumn(0,"pid");
+  analysisManager->FinishNtuple(0);
+
+  // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
-  analysisManager->CreateNtupleDColumn("edep");
-  analysisManager->CreateNtupleDColumn("x");
-  analysisManager->CreateNtupleDColumn("y");
-  analysisManager->CreateNtupleDColumn("z");
-  analysisManager->CreateNtupleIColumn("detId");
-  analysisManager->CreateNtupleDColumn("x0");
-  analysisManager->CreateNtupleDColumn("y0");
-  analysisManager->CreateNtupleDColumn("z0");
-  analysisManager->CreateNtupleIColumn("pid");
-  analysisManager->FinishNtuple();
+  analysisManager->CreateNtupleDColumn(1,"edep");
+  analysisManager->CreateNtupleDColumn(1,"x");
+  analysisManager->CreateNtupleDColumn(1,"y");
+  analysisManager->CreateNtupleDColumn(1,"z");
+  analysisManager->CreateNtupleIColumn(1,"detId");
+  analysisManager->FinishNtuple(1);
 }
 
 

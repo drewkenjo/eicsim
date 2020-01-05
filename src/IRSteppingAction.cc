@@ -24,8 +24,8 @@ IRSteppingAction::~IRSteppingAction()
 void IRSteppingAction::UserSteppingAction(const G4Step* step)
 {
   int tid = step->GetTrack()->GetTrackID();
-  if(fEventAction->origins.count(tid)==0)
-    fEventAction->origins[tid] = step->GetPreStepPoint()->GetPosition();
+//  if(fEventAction->origins.count(tid)==0)
+//    fEventAction->origins[tid] = step->GetPreStepPoint()->GetPosition();
 
 
   // get volume of the current step
@@ -64,6 +64,26 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
   G4ThreeVector pos0 = step->GetPreStepPoint()->GetPosition();
   G4ThreeVector pos1 = step->GetPostStepPoint()->GetPosition();
 
+  auto vol1 = step->GetPostStepPoint()->GetTouchableHandle()->GetVolume();
+  if(fDetConstruction->IsSensitive(vol1))
+  if(fEventAction->origins.count(tid)==0) {
+    G4ThreeVector mom = step->GetPreStepPoint()->GetMomentum();
+    fEventAction->origins[tid] = pos0;
+    auto analysisManager = G4AnalysisManager::Instance();
+    analysisManager->FillNtupleDColumn(0,0, mom.x()/cm);
+    analysisManager->FillNtupleDColumn(0,1, mom.y()/cm);
+    analysisManager->FillNtupleDColumn(0,2, mom.z()/cm);
+    analysisManager->FillNtupleIColumn(0,3, fDetConstruction->GetDetID(vol1));
+    analysisManager->FillNtupleDColumn(0,4, pos0.x()/cm);
+    analysisManager->FillNtupleDColumn(0,5, pos0.y()/cm);
+    analysisManager->FillNtupleDColumn(0,6, pos0.z()/cm);
+    analysisManager->FillNtupleIColumn(0,7, step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());
+    analysisManager->FillNtupleIColumn(0,8, step->GetTrack()->GetParentID());
+    analysisManager->AddNtupleRow(0);
+  }
+
+
+
   if ( fDetConstruction->IsSensitive(volume) ) {
     auto analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillH2(2, pos0.x()/cm, pos0.y()/cm);
@@ -74,16 +94,12 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
 //      <<step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName()<<G4endl;
 
 
-    analysisManager->FillNtupleDColumn(0, edep/GeV);
-    analysisManager->FillNtupleDColumn(1, pos0.x()/cm);
-    analysisManager->FillNtupleDColumn(2, pos0.y()/cm);
-    analysisManager->FillNtupleDColumn(3, pos0.z()/cm);
-    analysisManager->FillNtupleIColumn(4, fDetConstruction->GetDetID(volume));
-    analysisManager->FillNtupleDColumn(5, fEventAction->origins[tid].x()/cm);
-    analysisManager->FillNtupleDColumn(6, fEventAction->origins[tid].y()/cm);
-    analysisManager->FillNtupleDColumn(7, fEventAction->origins[tid].z()/cm);
-    analysisManager->FillNtupleIColumn(8, step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());
-    analysisManager->AddNtupleRow();
+    analysisManager->FillNtupleDColumn(1,0, edep/GeV);
+    analysisManager->FillNtupleDColumn(1,1, pos0.x()/cm);
+    analysisManager->FillNtupleDColumn(1,2, pos0.y()/cm);
+    analysisManager->FillNtupleDColumn(1,3, pos0.z()/cm);
+    analysisManager->FillNtupleIColumn(1,4, fDetConstruction->GetDetID(volume));
+    analysisManager->AddNtupleRow(1);
   }
 
   if(step->GetTrack()->GetTrackID()!=1) return;
