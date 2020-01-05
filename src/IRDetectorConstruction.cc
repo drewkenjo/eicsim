@@ -291,7 +291,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
     for (int ia = 0; ia < NUM; ia++) {
       //for (int ia=0;ia<1;ia++) {
-      printf("cb_VTX_ladder:: lay=%d  NUM=%d, dR=%f cb_VTX_ladder_deltaphi=%f %f \n",lay, ia,  dR, cb_VTX_ladder_deltaphi,ladder_deltashi);
+      printf("cb_VTX_ladder:: lay=%d  NUM=%d/%d, dR=%f, mass=%f, cb_VTX_ladder_deltaphi=%f %f \n",lay, ia, NUM,  dR, cb_VTX_ladder_Logic[lay]->GetMass()/g, cb_VTX_ladder_deltaphi,ladder_deltashi);
       printf("cb_VTX_ladder:: Module  loop:: %d\n", ia);
 
       phi = (ia * (cb_VTX_ladder_deltaphi));
