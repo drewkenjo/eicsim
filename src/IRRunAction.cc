@@ -28,9 +28,9 @@ IRRunAction::IRRunAction()
 
   // Creating ntuple
   analysisManager->CreateNtuple("tracks", "potential tracks");
-  analysisManager->CreateNtupleDColumn(0,"x");
-  analysisManager->CreateNtupleDColumn(0,"y");
-  analysisManager->CreateNtupleDColumn(0,"z");
+  analysisManager->CreateNtupleDColumn(0,"px");
+  analysisManager->CreateNtupleDColumn(0,"py");
+  analysisManager->CreateNtupleDColumn(0,"pz");
   analysisManager->CreateNtupleIColumn(0,"detId");
   analysisManager->CreateNtupleDColumn(0,"x0");
   analysisManager->CreateNtupleDColumn(0,"y0");

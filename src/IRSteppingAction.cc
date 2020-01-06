@@ -70,9 +70,9 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     G4ThreeVector mom = step->GetPreStepPoint()->GetMomentum();
     fEventAction->origins[tid] = pos0;
     auto analysisManager = G4AnalysisManager::Instance();
-    analysisManager->FillNtupleDColumn(0,0, mom.x()/cm);
-    analysisManager->FillNtupleDColumn(0,1, mom.y()/cm);
-    analysisManager->FillNtupleDColumn(0,2, mom.z()/cm);
+    analysisManager->FillNtupleDColumn(0,0, mom.x()/GeV);
+    analysisManager->FillNtupleDColumn(0,1, mom.y()/GeV);
+    analysisManager->FillNtupleDColumn(0,2, mom.z()/GeV);
     analysisManager->FillNtupleIColumn(0,3, fDetConstruction->GetDetID(vol1));
     analysisManager->FillNtupleDColumn(0,4, pos0.x()/cm);
     analysisManager->FillNtupleDColumn(0,5, pos0.y()/cm);
