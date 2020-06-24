@@ -42,9 +42,14 @@ IRRunAction::IRRunAction()
   // Creating ntuple
   analysisManager->CreateNtuple("ir", "Edeps");
   analysisManager->CreateNtupleDColumn(1,"edep");
-  analysisManager->CreateNtupleDColumn(1,"x");
-  analysisManager->CreateNtupleDColumn(1,"y");
-  analysisManager->CreateNtupleDColumn(1,"z");
+  analysisManager->CreateNtupleDColumn(1,"x0");
+  analysisManager->CreateNtupleDColumn(1,"y0");
+  analysisManager->CreateNtupleDColumn(1,"z0");
+  analysisManager->CreateNtupleDColumn(1,"x1");
+  analysisManager->CreateNtupleDColumn(1,"y1");
+  analysisManager->CreateNtupleDColumn(1,"z1");
+  analysisManager->CreateNtupleDColumn(1,"e");
+  analysisManager->CreateNtupleIColumn(1,"tid");
   analysisManager->CreateNtupleIColumn(1,"detId");
   analysisManager->FinishNtuple(1);
 }
