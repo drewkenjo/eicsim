@@ -48,10 +48,9 @@ void IRPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   {
     G4AutoLock lock(&myMutex);
     std::stringstream ss(lundFile->getline());
-    double tmp;
     double vx,vy,vz;
     double px,py,pz,e;
-    ss>>tmp>>tmp>>tmp>>tmp>>tmp>>tmp>>px>>py>>pz>>e>>tmp>>vx>>vy>>vz;
+    ss>>px>>py>>pz>>e>>vx>>vy>>vz;
 
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px*GeV,py*GeV,-pz*GeV).unit());
     fParticleGun->SetParticleEnergy(e*GeV);
