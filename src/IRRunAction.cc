@@ -50,6 +50,7 @@ IRRunAction::IRRunAction()
   analysisManager->CreateNtupleDColumn(1,"z1");
   analysisManager->CreateNtupleDColumn(1,"e");
   analysisManager->CreateNtupleIColumn(1,"tid");
+  analysisManager->CreateNtupleIColumn(1,"evid");
   analysisManager->CreateNtupleIColumn(1,"detId");
   analysisManager->FinishNtuple(1);
 }

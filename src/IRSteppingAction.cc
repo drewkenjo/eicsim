@@ -85,6 +85,9 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
 
 
   if ( fDetConstruction->IsSensitive(vol1) ) {
+    G4int eID = 0;
+    const G4Event* evt = G4RunManager::GetRunManager()->GetCurrentEvent();
+    if(evt) eID = evt->GetEventID();
     auto analysisManager = G4AnalysisManager::Instance();
     analysisManager->FillH2(2, pos0.x()/cm, pos0.y()/cm);
     analysisManager->FillH2(3, pos0.x()/cm, pos0.y()/cm, edep/GeV);
@@ -103,7 +106,8 @@ void IRSteppingAction::UserSteppingAction(const G4Step* step)
     analysisManager->FillNtupleDColumn(1,6, pos1.z()/cm);
     analysisManager->FillNtupleDColumn(1,7, step->GetPreStepPoint()->GetTotalEnergy()/GeV);
     analysisManager->FillNtupleIColumn(1,8, tid);
-    analysisManager->FillNtupleIColumn(1,9, fDetConstruction->GetDetID(vol1));
+    analysisManager->FillNtupleIColumn(1,9, eID);
+    analysisManager->FillNtupleIColumn(1,10, fDetConstruction->GetDetID(vol1));
     analysisManager->AddNtupleRow(1);
   }
 
