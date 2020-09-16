@@ -37,19 +37,39 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4NistManager* nist = G4NistManager::Instance();
 
   // Option to switch on/off checking of volumes overlaps
-  G4bool checkOverlaps = true;
+  G4bool checkOverlaps = false;
 
   G4double world_sizeXY = 3*m;
   G4double world_sizeZ  = 13*m;
-  G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
+  G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
+
+  double rr = 8.31446261815324;
+  double roomtemp = 293*kelvin;
+
+  double h2den = 1e-1*2.01588*g/(rr*roomtemp)/m3;
+  G4Element* elH = nist->FindOrBuildElement("H");
+  G4Material* H2mat = new G4Material("hydrogen",h2den,1,kStateGas,roomtemp);
+  H2mat->AddElement(elH, 2);
+
+  double coden = 1e-1*28.01*g/(rr*roomtemp)/m3;
+  G4Element* elC = nist->FindOrBuildElement("C");
+  G4Element* elO = nist->FindOrBuildElement("O");
+  G4Material* COmat = new G4Material("co",coden,2,kStateGas,roomtemp);
+  COmat->AddElement(elC, 1);
+  COmat->AddElement(elO, 1);
+
+  double vacden = 0.95*h2den + 0.05*coden;
+  G4Material* vacuum = new G4Material("vacuum",vacden,2,kStateGas,roomtemp);
+  vacuum->AddMaterial(H2mat, 0.95*h2den/vacden);
+  vacuum->AddMaterial(COmat, 0.05*coden/vacden);
 
   G4Box* solidWorld = new G4Box("World", 0.5*world_sizeXY, 0.5*world_sizeXY, 0.5*world_sizeZ);
-  G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, world_mat, "World");
+  G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, vacuum, "World");
   G4VPhysicalVolume* physWorld = new G4PVPlacement(0, G4ThreeVector(), logicWorld, "World", 0, false, 0, checkOverlaps);
 
 
   G4RotationMatrix *stlrm = new G4RotationMatrix();
-  stlrm->rotateY(90*degree);
+  stlrm->rotateY(-90*degree);
 
   /*
 //  CADMesh * mesh = new CADMesh("beamlines.stl.stl", mm, G4ThreeVector(0, 0, 0), false);
@@ -288,6 +308,8 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4VPhysicalVolume* vol28_phys = new G4PVPlacement(stlrm, G4ThreeVector(), vol28_logic, "vol28_phys", logicWorld, false, 0, checkOverlaps);
 
 
+  sensitives[vol01_phys] = 1;
+
 /*
   sensitives[vol04_phys] = 4;
   sensitives[vol06_phys] = 6;
@@ -428,7 +450,8 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
     for (int ia = 0; ia < NUM; ia++) {
       //for (int ia=0;ia<1;ia++) {
-      printf("cb_VTX_ladder:: lay=%d  NUM=%d/%d, dR=%f, mass=%f, cb_VTX_ladder_deltaphi=%f %f \n",lay, ia, NUM,  dR, cb_VTX_ladder_Logic[lay]->GetMass()/g, cb_VTX_ladder_deltaphi,ladder_deltashi);
+      double m0 = cb_VTX_ladder_Logic[lay]->GetMass()/g;
+      printf("cb_VTX_ladder:: lay=%d  NUM=%d/%d, dR=%f, mass=%f/%f, cb_VTX_ladder_deltaphi=%f %f \n",lay, ia, NUM,  dR, m0,m0*NUM, cb_VTX_ladder_deltaphi,ladder_deltashi);
       printf("cb_VTX_ladder:: Module  loop:: %d\n", ia);
 
       phi = (ia * (cb_VTX_ladder_deltaphi));
