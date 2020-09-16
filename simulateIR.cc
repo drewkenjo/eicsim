@@ -8,7 +8,6 @@
 #endif
 
 #include "G4UImanager.hh"
-#include "FTFP_BERT.hh"
 #include "G4PhysListFactory.hh"
 
 #include "G4VisExecutive.hh"
@@ -38,7 +37,7 @@ int main(int argc,char** argv)
   //
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
-  runManager->SetNumberOfThreads(8);
+  runManager->SetNumberOfThreads(1);
 #else
   G4RunManager* runManager = new G4RunManager;
 #endif
@@ -97,5 +96,6 @@ int main(int argc,char** argv)
 
   delete visManager;
   delete runManager;
+  return 0;
 }
 
