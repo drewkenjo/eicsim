@@ -37,6 +37,7 @@
 /vis/set/colour red
 /vis/set/lineWidth 2
 /vis/scene/add/frame   # Simple frame around the view
+/vis/scene/add/axes 0 0 4 1 m
 #/vis/set/colour        # Revert to default colour (white)
 #/vis/set/lineWidth     # Revert to default line width (1.)
 
@@ -60,7 +61,7 @@
 /vis/viewer/set/rotationStyle freeRotation
 
 /vis/viewer/zoomTo 150
-/vis/viewer/addCutawayPlane 0 0 0 cm 1 0 0
+#/vis/viewer/addCutawayPlane 0 0 0 cm 1 0 0
 /vis/viewer/set/targetPoint 0 0 -250 cm
 #/vis/viewer/set/viewpointVector 0 -1 0.1
 
