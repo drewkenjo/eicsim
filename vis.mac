@@ -37,7 +37,7 @@
 /vis/set/colour red
 /vis/set/lineWidth 2
 /vis/scene/add/frame   # Simple frame around the view
-/vis/scene/add/axes 0 0 4 1 m
+/vis/scene/add/axes 0 0 -4 1 m
 #/vis/set/colour        # Revert to default colour (white)
 #/vis/set/lineWidth     # Revert to default line width (1.)
 

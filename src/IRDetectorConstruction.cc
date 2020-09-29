@@ -69,7 +69,8 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
 
   G4RotationMatrix *stlrm = new G4RotationMatrix();
-  stlrm->rotateY(-90*degree);
+  stlrm->rotateY(90*degree);
+  stlrm->rotateX(90*degree);
 
   /*
 //  CADMesh * mesh = new CADMesh("beamlines.stl.stl", mm, G4ThreeVector(0, 0, 0), false);
