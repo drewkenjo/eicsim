@@ -40,7 +40,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4bool checkOverlaps = false;
 
   G4double world_sizeXY = 3*m;
-  G4double world_sizeZ  = 13*m;
+  G4double world_sizeZ  = 120*m;
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
   double rr = 8.31446261815324;
@@ -115,6 +115,13 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   G4VPhysicalVolume* vol04_phys = new G4PVPlacement(stlrm, G4ThreeVector(), vol04_logic, "vol04_phys", logicWorld, false, 0, checkOverlaps);
 
 
+//Ion beam pipe in hadron forward
+  G4RotationMatrix *ionrm = new G4RotationMatrix();
+  ionrm->rotateY(180*degree);
+  auto vol000_mesh = CADMesh::TessellatedMesh::FromSTL("stl/Upstream_beampipe.stl.stl");
+  G4VSolid* vol000_solid = vol000_mesh->GetSolid();
+  G4LogicalVolume* vol000_logic = new G4LogicalVolume(vol000_solid, nist->FindOrBuildMaterial("G4_Al"), "vol000_logic", 0, 0, 0);
+  G4VPhysicalVolume* vol000_phys = new G4PVPlacement(ionrm, G4ThreeVector(69.9066, -52.4124, 37800), vol000_logic, "vol000_phys", logicWorld, false, 0, checkOverlaps);
 
 //Ion beam pipe in hadron forward
 //  CADMesh * vol05_mesh = new CADMesh("stl/Detectorchamber_hadron_forward.stl.stl", mm, G4ThreeVector(0, 0, 0), false);
