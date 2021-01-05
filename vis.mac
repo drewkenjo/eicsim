@@ -66,7 +66,7 @@
 #/vis/viewer/set/viewpointVector 0 -1 0.1
 
 
-/vis/geometry/set/colour vol000_logic 0 0.901961 0.098039 0.294118 0.3
+/vis/geometry/set/colour vol000_logic 0 0.901961 0.098039 0.294118 0.5
 /vis/geometry/set/colour vol01_logic 0 0.901961 0.098039 0.294118 0.3
 ##/vis/geometry/set/colour vol02_logic 0 0.235294 0.705882 0.294118 1
 /vis/geometry/set/colour vol02_logic 0 1.000000 0.882353 0.098039 0.3

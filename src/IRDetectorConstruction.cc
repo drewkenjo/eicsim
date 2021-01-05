@@ -72,13 +72,6 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
   stlrm->rotateY(90*degree);
   stlrm->rotateX(90*degree);
 
-  /*
-//  CADMesh * mesh = new CADMesh("beamlines.stl.stl", mm, G4ThreeVector(0, 0, 0), false);
-  auto mesh = CADMesh::TessellatedMesh::FromSTL("beamlines.stl.stl");
-  G4VSolid* cad_solid = mesh->GetSolid();
-  G4LogicalVolume* cad_logical = new G4LogicalVolume(cad_solid, nist->FindOrBuildMaterial("G4_WATER"), "cad_logical", 0, 0, 0);
-  G4VPhysicalVolume* cad_physical = new G4PVPlacement(stlrm, G4ThreeVector(), cad_logical, "cad_physical", logicWorld, false, 0);
-  */
 
 //Central Chamber - in future need 2um G4_Au coating
 //  CADMesh * vol01_mesh = new CADMesh("stl/Detectorchamber_Be_section.stl.stl", mm, G4ThreeVector(0, 0, 0), false);
