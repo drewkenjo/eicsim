@@ -14,6 +14,7 @@
 #include "G4UIExecutive.hh"
 
 #include "Randomize.hh"
+#include <fstream>
 
 int main(int argc,char** argv)
 {
@@ -74,12 +75,10 @@ int main(int argc,char** argv)
   if ( ! ui ) {
     // batch mode
     runManager->Initialize();
-    std::ifstream ff(lundfile);
-    std::string line;
-    int numlines = 0;
-    while (std::getline(ff, line))
-      numlines++;
-    runManager->BeamOn(numlines);
+    std::ifstream lundf(lundfile);
+    lundf.seekg(0, std::ios_base::end);
+    int numevs = lundf.tellg()/24;
+    runManager->BeamOn(numevs);
   }
   else {
     // interactive mode

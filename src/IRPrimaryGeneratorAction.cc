@@ -10,9 +10,8 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 #include "G4AutoLock.hh"
-namespace { G4Mutex myMutex = G4MUTEX_INITIALIZER; }
 
-LundFileReader* IRPrimaryGeneratorAction::lundFile = 0;
+namespace { G4Mutex myMutex = G4MUTEX_INITIALIZER; }
 
 IRPrimaryGeneratorAction::IRPrimaryGeneratorAction(G4String filename)
 : G4VUserPrimaryGeneratorAction(),
@@ -27,16 +26,15 @@ IRPrimaryGeneratorAction::IRPrimaryGeneratorAction(G4String filename)
   fParticleGun->SetParticleDefinition(particle);
 
   G4AutoLock lock(&myMutex);
-  if(!lundFile) lundFile = new LundFileReader(filename);
+  if(!lundFile.is_open()) lundFile.open(filename, std::ios::binary);
 }
 
 
 IRPrimaryGeneratorAction::~IRPrimaryGeneratorAction()
 {
   G4AutoLock lock(&myMutex);
-  if(lundFile) {
-    delete lundFile;
-    lundFile = 0;
+  if(lundFile.is_open()) {
+    lundFile.close();
   }
   delete fParticleGun;
 }
@@ -44,18 +42,25 @@ IRPrimaryGeneratorAction::~IRPrimaryGeneratorAction()
 
 void IRPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  if(lundFile)
+  if(lundFile.is_open())
   {
     G4AutoLock lock(&myMutex);
-    std::stringstream ss(lundFile->getline());
-    double vx,vy,vz;
-    double px,py,pz,e;
-    ss>>px>>py>>pz>>e>>vx>>vy>>vz;
+    float px,py,pz;
+    float vx,vy,vz;
+    lundFile.read(reinterpret_cast<char*>(&px), sizeof(float));
+    lundFile.read(reinterpret_cast<char*>(&py), sizeof(float));
+    lundFile.read(reinterpret_cast<char*>(&pz), sizeof(float));
+    lundFile.read(reinterpret_cast<char*>(&vx), sizeof(float));
+    lundFile.read(reinterpret_cast<char*>(&vy), sizeof(float));
+    lundFile.read(reinterpret_cast<char*>(&vz), sizeof(float));
 
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz).unit());
-    fParticleGun->SetParticleEnergy(e*GeV);
-    fParticleGun->SetParticlePosition(G4ThreeVector(vx*cm,vy*cm,vz*cm));
-    fParticleGun->GeneratePrimaryVertex(anEvent);
+    if(lundFile.good()) {
+//std::cout<<px<<" "<<py<<" "<<pz<<" "<<vx<<" "<<vy<<" "<<vz<<std::endl;
+      fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz).unit());
+      fParticleGun->SetParticleEnergy(sqrt(px*px + py*py + pz*pz)*GeV);
+      fParticleGun->SetParticlePosition(G4ThreeVector(vx*cm,vy*cm,vz*cm));
+      fParticleGun->GeneratePrimaryVertex(anEvent);
+    }
   }
 }
 

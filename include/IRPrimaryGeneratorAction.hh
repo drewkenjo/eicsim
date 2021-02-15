@@ -1,11 +1,11 @@
 #ifndef IRPrimaryGeneratorAction_h
 #define IRPrimaryGeneratorAction_h 1
 
+#include <fstream>
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"
 #include "Randomize.hh"
 #include "globals.hh"
-#include "LundFileReader.hh"
 
 class G4ParticleGun;
 class G4Event;
@@ -31,7 +31,7 @@ class IRPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   private:
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
     G4Random rnd;
-    static LundFileReader* lundFile;
+    inline static std::ifstream lundFile;
 };
 
 
