@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+body {
+  padding-top: 70px
+}
+
+.nav-stacked {
+  width: 10em;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container">
+
+
+  <ul class="nav nav-pills nav-stacked navbar-fixed-top">
+    <li class="active"><a data-toggle="pill" href="#verg0">SR input+Old G</a></li>
+    <li><a data-toggle="pill" href="#verg5">SR input+New G</a></li>
+    <li><a data-toggle="pill" href="#verg4">SR input + New G + Au layer</a></li>
+    <li><a data-toggle="pill" href="#verm5">Synrad input+New G</a></li>
+    <li><a data-toggle="pill" href="#verm4">Synrad input + New G + Au layer</a></li>
+  </ul>
+
+<!-- Tab panes -->
+
+  <div class="tab-content">
+    <div id="verg0" class="tab-pane active">
+      <h3>SR input + Old Geometry</h3>
+<div class=details>
+<ul>
+<li>Detector chamber geometry file: <b>Detector chamber 3-20-20.stp</b></li>
+<li>Upstream geometry based on vaccuum space model: <b>Electron beam pipe 200818.stp</b></li>
+<li>No Au coating</li>
+<li>10 electron bunches<br>
+from Vitaly's email: one bunch is approximately 0.19 E+10 photons corresponding to exactly 1.201 E+10 electrons</li>
+<li>SVT details can be found on <a href=https://github.com/drewkenjo/eicsim/wiki/Geometry-Status>geometry page</a></li>
+</ul>
+</div>
+<div class=plots>
+<img src=figures/verg0/fig1.png width=80%>
+<img src=figures/verg0/fig2.png width=80%>
+<img src=figures/verg0/fig4.png width=40%>
+<img src=figures/verg0/fig5.png width=40%>
+<img src=figures/verg0/fig3.png width=40%>
+</div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="verg5" class="tab-pane fade" role="tabpanel" aria-labelledby="verg5-tab">
+      <h3>SR input + New Geometry</h3>
+<div class=details>
+<ul>
+<li>Detector chamber geometry file: <b>Detector chamber 210222.stp</b></li>
+<li>Upstream geometry based on vaccuum space model: <b>Detector chamber 210211 aligned.stp</b></li>
+<li>No Au coating</li>
+<li>10 electron bunches<br>
+from Vitaly's email: one bunch is approximately 0.19 E+10 photons corresponding to exactly 1.201 E+10 electrons</li>
+<li>SVT details can be found on <a href=https://github.com/drewkenjo/eicsim/wiki/Geometry-Status>geometry page</a></li>
+</ul>
+</div>
+<div class=plots>
+<img src=figures/verg5/fig1.png width=80%>
+<img src=figures/verg5/fig2.png width=80%>
+<img src=figures/verg5/fig3.png width=80%>
+<img src=figures/verg5/fig4.png width=40%>
+</div>
+    </div>
+    <div id="verg4" class="tab-pane ">
+      <h3>SR input + New Geometry + Au layer</h3>
+<div class=details>
+<ul>
+<li>Detector chamber geometry file: <b>Detector chamber 210222.stp</b></li>
+<li>Upstream geometry based on vaccuum space model: <b>Detector chamber 210211 aligned.stp</b></li>
+<li><b>2 microns Au coating</b></li>
+<li><b>5 electron bunches</b><br>
+from Vitaly's email: one bunch is approximately 0.19 E+10 photons corresponding to exactly 1.201 E+10 electrons</li>
+<li>SVT details can be found on <a href=https://github.com/drewkenjo/eicsim/wiki/Geometry-Status>geometry page</a></li>
+</ul>
+</div>
+<div class=plots>
+<img src=figures/verg4/fig1.png width=80%>
+<img src=figures/verg4/fig2.png width=80%>
+<img src=figures/verg5/fig3.png width=80%>
+<img src=figures/verg5/fig4.png width=40%>
+</div>
+    </div>
+    <div id="verm5" class="tab-pane ">
+      <h3>SynRad input + New Geometry</h3>
+<div class=details>
+<ul>
+<li>Detector chamber geometry file: <b>Detector chamber 210222.stp</b></li>
+<li>Upstream geometry based on vaccuum space model: <b>Detector chamber 210211 aligned.stp</b></li>
+<li>No Au coating</li>
+<li>Input from Marcy (SynRad), normalization in progress
+<li>SVT details can be found on <a href=https://github.com/drewkenjo/eicsim/wiki/Geometry-Status>geometry page</a></li>
+</ul>
+</div>
+<div class=plots>
+<img src=figures/verm5/fig1.png width=80%>
+<img src=figures/verm5/fig2.png width=80%>
+<img src=figures/verm5/fig3.png width=80%>
+</div>
+    </div>
+    <div id="verm4" class="tab-pane ">
+      <h3>SynRad input + New Geometry + Au layer</h3>
+<div class=details>
+<ul>
+<li>Detector chamber geometry file: <b>Detector chamber 210222.stp</b></li>
+<li>Upstream geometry based on vaccuum space model: <b>Detector chamber 210211 aligned.stp</b></li>
+<li><b>2 microns Au coating</b></li>
+<li>Input from Marcy (SynRad), normalization in progress
+<li>SVT details can be found on <a href=https://github.com/drewkenjo/eicsim/wiki/Geometry-Status>geometry page</a></li>
+</ul>
+</div>
+<div class=plots>
+<img src=figures/verm4/fig1.png width=80%>
+<img src=figures/verm4/fig2.png width=80%>
+<img src=figures/verm4/fig3.png width=80%>
+</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
