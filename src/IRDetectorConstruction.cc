@@ -6,6 +6,7 @@
 #include "G4Cons.hh"
 #include "G4Orb.hh"
 #include "G4Sphere.hh"
+#include "G4Tubs.hh"
 #include "G4Trd.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
@@ -68,7 +69,7 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
 
   std::string vols[][2] = {
-    {"stl/Detector_chamber_-_beryllium_section.stl", "G4_Be"},			// 1
+//    {"stl/Detector_chamber_-_beryllium_section.stl", "G4_Be"},			// 1
     {"stl/Detector_chamber_-_electron_exit_round.stl", "G4_W"},			// 2
     {"stl/Detector_chamber_-_hadron_entrance_round.stl", "G4_Al"},		// 3
     {"stl/Detector_chamber_-_hadron_forward.stl", "G4_W"},				// 4
@@ -98,12 +99,29 @@ G4VPhysicalVolume* IRDetectorConstruction::Construct()
 
     auto vol_mesh = CADMesh::TessellatedMesh::FromSTL(vol[0]);
     auto vol_sol = vol_mesh->GetSolid();
-    auto vol_log = new G4LogicalVolume(vol_sol, nist->FindOrBuildMaterial(vol[1]), vstr+"_log", 0, 0, 0);
+    auto vol_log = new G4LogicalVolume(vol_sol, nist->FindOrBuildMaterial(vol[1]), vstr+"_log");
     auto vol_phy = new G4PVPlacement(0, G4ThreeVector(), vol_log, vstr+"_phy", logicWorld, false, 0, checkOverlaps);
 
-    if(ivol==1)
-      sensitives[vol_phy] = 1;
+//    if(ivol==1)
+//      sensitives[vol_phy] = 1;
   }
+
+
+  auto endSol = new G4Tubs("endSol", 50*mm, 51*mm, 3*m, 0*deg, 360*deg);
+  auto endLog = new G4LogicalVolume(endSol, nist->FindOrBuildMaterial("G4_Al"), "endLog");
+  auto endPhy = new G4PVPlacement(0, G4ThreeVector(0,0,-35.5*m), endLog, "endPhy", logicWorld, false, 0, checkOverlaps);
+
+  auto be_sol = new G4Tubs("be_sol", 31*mm, 32*mm, 734.05*mm, 0*deg, 360*deg);
+  auto be_log = new G4LogicalVolume(be_sol, nist->FindOrBuildMaterial("G4_Be"), "be_log");
+  auto be_phy = new G4PVPlacement(0, G4ThreeVector(0,0,64.05*mm), be_log, "be_phy", logicWorld, false, 0, checkOverlaps);
+  sensitives[be_phy] = 1;
+
+
+  auto au_sol = new G4Tubs("au_sol", 31*mm-2*um, 31*mm, 734.05*mm, 0*deg, 360*deg);
+  auto au_log = new G4LogicalVolume(au_sol, nist->FindOrBuildMaterial("G4_Au"), "au_log");
+  auto au_phy = new G4PVPlacement(0, G4ThreeVector(0,0,64.05*mm), au_log, "au_phy", logicWorld, false, 0, checkOverlaps);
+  sensitives[au_phy] = 2;
+
 
 
 /*
