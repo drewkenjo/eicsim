@@ -7,8 +7,8 @@
 #include "G4SystemOfUnits.hh"
 
 
-IRRunAction::IRRunAction()
- : G4UserRunAction()
+IRRunAction::IRRunAction(IREventAction* eventAction)
+ : G4UserRunAction(), fEventAction(eventAction)
 { 
   // set printing event number per each event
   auto analysisManager = G4AnalysisManager::Instance();
@@ -27,32 +27,28 @@ IRRunAction::IRRunAction()
   analysisManager->CreateH1("flux","flux total energy", 2, 0,2);
 
   // Creating ntuple
-  analysisManager->CreateNtuple("tracks", "potential tracks");
-  analysisManager->CreateNtupleDColumn(0,"px");
-  analysisManager->CreateNtupleDColumn(0,"py");
-  analysisManager->CreateNtupleDColumn(0,"pz");
-  analysisManager->CreateNtupleIColumn(0,"detId");
-  analysisManager->CreateNtupleDColumn(0,"x0");
-  analysisManager->CreateNtupleDColumn(0,"y0");
-  analysisManager->CreateNtupleDColumn(0,"z0");
-  analysisManager->CreateNtupleIColumn(0,"pdg");
-  analysisManager->CreateNtupleIColumn(0,"pid");
-  analysisManager->FinishNtuple(0);
+  analysisManager->CreateNtuple("hits", "hits");
 
-  // Creating ntuple
-  analysisManager->CreateNtuple("ir", "Edeps");
-  analysisManager->CreateNtupleDColumn(1,"edep");
-  analysisManager->CreateNtupleDColumn(1,"x0");
-  analysisManager->CreateNtupleDColumn(1,"y0");
-  analysisManager->CreateNtupleDColumn(1,"z0");
-  analysisManager->CreateNtupleDColumn(1,"x1");
-  analysisManager->CreateNtupleDColumn(1,"y1");
-  analysisManager->CreateNtupleDColumn(1,"z1");
-  analysisManager->CreateNtupleDColumn(1,"e");
-  analysisManager->CreateNtupleIColumn(1,"tid");
-  analysisManager->CreateNtupleIColumn(1,"evid");
-  analysisManager->CreateNtupleIColumn(1,"detId");
-  analysisManager->FinishNtuple(1);
+  analysisManager->CreateNtupleFColumn("vx");
+  analysisManager->CreateNtupleFColumn("vy");
+  analysisManager->CreateNtupleFColumn("vz");
+  analysisManager->CreateNtupleFColumn("px");
+  analysisManager->CreateNtupleFColumn("py");
+  analysisManager->CreateNtupleFColumn("pz");
+
+  analysisManager->CreateNtupleIColumn("pdgs", fEventAction->pdgs);
+  analysisManager->CreateNtupleIColumn("tids", fEventAction->tids);
+  analysisManager->CreateNtupleIColumn("pids", fEventAction->pids);
+  analysisManager->CreateNtupleIColumn("dids", fEventAction->dids);
+
+  analysisManager->CreateNtupleDColumn("x0s", fEventAction->x0s);
+  analysisManager->CreateNtupleDColumn("y0s", fEventAction->y0s);
+  analysisManager->CreateNtupleDColumn("z0s", fEventAction->z0s);
+  analysisManager->CreateNtupleDColumn("x1s", fEventAction->x1s);
+  analysisManager->CreateNtupleDColumn("y1s", fEventAction->y1s);
+  analysisManager->CreateNtupleDColumn("z1s", fEventAction->z1s);
+  analysisManager->CreateNtupleDColumn("edeps", fEventAction->edeps);
+  analysisManager->FinishNtuple();
 }
 
 

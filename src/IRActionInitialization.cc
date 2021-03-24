@@ -19,15 +19,16 @@ IRActionInitialization::~IRActionInitialization()
 
 void IRActionInitialization::BuildForMaster() const
 {
-  SetUserAction(new IRRunAction);
+  auto eventAction = new IREventAction;
+  SetUserAction(new IRRunAction(eventAction));
 }
 
 
 void IRActionInitialization::Build() const
 {
-  SetUserAction(new IRPrimaryGeneratorAction(lundFilename));
-  SetUserAction(new IRRunAction);
   auto eventAction = new IREventAction;
+  SetUserAction(new IRPrimaryGeneratorAction(lundFilename, eventAction));
+  SetUserAction(new IRRunAction(eventAction));
   SetUserAction(eventAction);
   SetUserAction(new IRSteppingAction(fDetConstruction,eventAction));
 }  

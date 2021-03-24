@@ -13,9 +13,9 @@
 
 namespace { G4Mutex myMutex = G4MUTEX_INITIALIZER; }
 
-IRPrimaryGeneratorAction::IRPrimaryGeneratorAction(G4String filename)
+IRPrimaryGeneratorAction::IRPrimaryGeneratorAction(G4String filename, IREventAction* eventAction)
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0)
+  fParticleGun(0), fEventAction(eventAction)
 {
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);
@@ -55,6 +55,8 @@ void IRPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     lundFile.read(reinterpret_cast<char*>(&vz), sizeof(float));
 
     if(lundFile.good()) {
+      fEventAction->SetPrimary(vx,vy,vz,px,py,pz);
+
 //std::cout<<px<<" "<<py<<" "<<pz<<" "<<vx<<" "<<vy<<" "<<vz<<std::endl;
       fParticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz).unit());
       fParticleGun->SetParticleEnergy(sqrt(px*px + py*py + pz*pz)*GeV);

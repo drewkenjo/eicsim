@@ -78,6 +78,7 @@ int main(int argc,char** argv)
     std::ifstream lundf(lundfile);
     lundf.seekg(0, std::ios_base::end);
     int numevs = lundf.tellg()/24;
+    std::cout<<numevs<<" events"<<std::endl;
     runManager->BeamOn(numevs);
   }
   else {

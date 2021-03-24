@@ -4,12 +4,14 @@
 #include <fstream>
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"
+#include "IREventAction.hh"
 #include "Randomize.hh"
 #include "globals.hh"
 
 class G4ParticleGun;
 class G4Event;
 class G4Box;
+class IREventAction;
 
 /// The primary generator action class with particle gun.
 ///
@@ -19,7 +21,7 @@ class G4Box;
 class IRPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
-    IRPrimaryGeneratorAction(G4String="");
+    IRPrimaryGeneratorAction(G4String, IREventAction* eventAction);
     virtual ~IRPrimaryGeneratorAction();
 
     // method from the base class
@@ -32,6 +34,7 @@ class IRPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
     G4Random rnd;
     inline static std::ifstream lundFile;
+    IREventAction* fEventAction;
 };
 
 
